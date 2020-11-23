@@ -64,7 +64,9 @@ trait Validable
      */
     public function isValid()
     {
-        $this->getValidator()->setData($this->getAttributes());
+        $this->getValidator()
+            ->setRules($this->exists ? $this->getUpdateRules() : $this->getCreateRules())
+            ->setData($this->getAttributes());
 
         return $this->getValidator()->passes();
     }

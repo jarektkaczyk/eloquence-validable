@@ -47,15 +47,8 @@ class ValidableObserverTest extends \PHPUnit_Framework_TestCase {
     {
         $observer = new Observer;
 
-        $validator = m::mock('\Illuminate\Contracts\Validation\Validator');
-        $validator->shouldReceive('setRules')->once()->with(['update_rules'])->andReturn($validator);
-        $validator->shouldReceive('setRules')->once()->with(['create_rules'])->andReturn($validator);
-
         $validable = m::mock('\Sofa\Eloquence\Contracts\Validable');
         $validable->shouldReceive('validationEnabled')->once()->andReturn(true);
-        $validable->shouldReceive('getValidator')->twice()->andReturn($validator);
-        $validable->shouldReceive('getUpdateRules')->once()->andReturn(['update_rules']);
-        $validable->shouldReceive('getCreateRules')->once()->andReturn(['create_rules']);
         $validable->shouldReceive('isValid')->once()->andReturn(false);
 
         $this->assertFalse($observer->updating($validable));
@@ -81,15 +74,8 @@ class ValidableObserverTest extends \PHPUnit_Framework_TestCase {
     {
         $observer = new Observer;
 
-        $validator = m::mock('\Illuminate\Contracts\Validation\Validator');
-        $validator->shouldReceive('setRules')->once()->with(['update_rules'])->andReturn($validator);
-        $validator->shouldReceive('setRules')->once()->with(['create_rules'])->andReturn($validator);
-
         $validable = m::mock('\Sofa\Eloquence\Contracts\Validable');
         $validable->shouldReceive('validationEnabled')->once()->andReturn(true);
-        $validable->shouldReceive('getValidator')->twice()->andReturn($validator);
-        $validable->shouldReceive('getUpdateRules')->once()->andReturn(['update_rules']);
-        $validable->shouldReceive('getCreateRules')->once()->andReturn(['create_rules']);
         $validable->shouldReceive('isValid')->once()->andReturn(true);
 
         $this->assertNull($observer->updating($validable));
