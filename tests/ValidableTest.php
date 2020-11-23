@@ -130,6 +130,9 @@ class ValidableTest extends \PHPUnit_Framework_TestCase {
     public function it_checks_all_the_attributes()
     {
         $model = $this->getModel();
+        $model->getValidator()->shouldReceive('setRules')
+            ->with($model->exists ? $model->getUpdateRules() : $model->getCreateRules())
+            ->andReturnSelf();
         $model->getValidator()->shouldReceive('setData')->with($model->getAttributes());
         $this->assertTrue($model->isValid());
     }

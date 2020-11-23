@@ -41,29 +41,7 @@ class Observer
      */
     public function updating(Validable $model)
     {
-        if ($model->validationEnabled()) {
-            return $this->validateUpdate($model);
-        }
-    }
-
-    /**
-     * Halt updating if model doesn't pass validation.
-     *
-     * @param  \Sofa\Eloquence\Contracts\Validable $model
-     * @return void|false
-     */
-    protected function validateUpdate(Validable $model)
-    {
-        // When we are trying to update this model we need to set the update rules
-        // on the validator first, next we can determine if the model is valid,
-        // finally we restore original rules and notify in case of failure.
-        $model->getValidator()->setRules($model->getUpdateRules());
-
-        $valid = $model->isValid();
-
-        $model->getValidator()->setRules($model->getCreateRules());
-
-        if (!$valid) {
+        if ($model->validationEnabled() && !$model->isValid()) {
             return false;
         }
     }
