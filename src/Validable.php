@@ -4,6 +4,7 @@ namespace Sofa\Eloquence;
 
 use Sofa\Eloquence\Validable\Observer;
 use Illuminate\Contracts\Validation\Factory;
+use Sofa\Eloquence\Contracts\Validable as ValidableContract;
 
 /**
  * @method integer getKey()
@@ -48,7 +49,9 @@ trait Validable
      */
     public static function bootValidable()
     {
-        static::observe(new Observer);
+        if (is_subclass_of(static::class, ValidableContract::class)) {
+            static::observe(new Observer);
+        }
 
         if (!static::$validatorFactory) {
             if (function_exists('app') && app()->bound('validator')) {
