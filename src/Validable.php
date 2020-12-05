@@ -6,7 +6,7 @@ use Sofa\Eloquence\Validable\Observer;
 use Illuminate\Contracts\Validation\Factory;
 
 /**
- * @method integer getKey()
+ * @method int getKey()
  * @method string getKeyName()
  */
 trait Validable
@@ -14,7 +14,7 @@ trait Validable
     /**
      * Validation switch.
      *
-     * @var boolean
+     * @var bool
      */
     protected $skipValidation = false;
 
@@ -60,7 +60,7 @@ trait Validable
     /**
      * Determine whether all the attributes on this instance pass validation.
      *
-     * @return boolean
+     * @return bool
      */
     public function isValid()
     {
@@ -106,7 +106,7 @@ trait Validable
     /**
      * Get current validation flag.
      *
-     * @return integer|false
+     * @return int|false
      */
     public function skipsValidation()
     {
@@ -116,7 +116,7 @@ trait Validable
     /**
      * Determine whether validation is enabled for this instance.
      *
-     * @return boolean
+     * @return bool
      */
     public function validationEnabled()
     {
@@ -264,7 +264,7 @@ trait Validable
     /**
      * Get all validation rules for update for given id.
      *
-     * @param  \Illuminate\Database\Eloquent\Model|integer|string $id
+     * @param  \Illuminate\Database\Eloquent\Model|int|string $id
      * @return array
      */
     public static function getUpdateRulesForId($id)

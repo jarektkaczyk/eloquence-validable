@@ -9,14 +9,14 @@ class Observer
     /**
      * Validation skipping flag.
      *
-     * @var integer
+     * @var int
      */
     const SKIP_ONCE = 1;
 
     /**
      * Validation skipping flag.
      *
-     * @var integer
+     * @var int
      */
     const SKIP_ALWAYS = 2;
 
