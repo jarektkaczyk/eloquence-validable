@@ -110,6 +110,7 @@ class ValidableTest extends TestCase
             'name' => ['required', 'max:10', 'unique:users,username,null,id,account_id,5', 'max:255'],
             'age' => ['min:5'],
             'last_name' => ['max:255'],
+            'city' => ['max:255'],
         ];
 
         $this->assertEquals($rulesMerged, $this->getModel()->getCreateRules());
@@ -127,7 +128,7 @@ class ValidableTest extends TestCase
     public function it_uses_rules_from_all_groups()
     {
         $model = $this->getModel();
-        $this->assertEquals(['email', 'name', 'age', 'last_name'], $model::getValidatedFields());
+        $this->assertEquals(['email', 'name', 'age', 'last_name', 'city'], $model::getValidatedFields());
     }
 
     protected function getModel()
@@ -156,4 +157,10 @@ class ValidableEloquentStub extends Model
         'name' => ['max:255'],
         'last_name' => ['max:255'],
     ];
+
+    protected static function generateCustomRules() {
+        return [
+            'city' => ['max:255'],
+        ];
+    }
 }

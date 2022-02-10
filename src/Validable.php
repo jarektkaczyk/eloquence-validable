@@ -303,6 +303,12 @@ trait Validable
             }
         }
 
+        foreach (get_class_methods(get_called_class()) as $method) {
+            if (preg_match('/^generate.*rules$/i', $method)) {
+                $groups[] = "method:$method";
+            }
+        }
+
         return $groups;
     }
 
@@ -314,6 +320,12 @@ trait Validable
      */
     protected static function getRulesGroup($group)
     {
+        if(substr($group, 0, 7) === 'method:') {
+            $method = substr($group, 7);
+            
+            return static::$method();
+        }
+
         return static::$$group;
     }
 
